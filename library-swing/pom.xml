@@ -20,6 +20,7 @@
         <dependency>
             <groupId>org.iesfm</groupId>
             <artifactId>library-model</artifactId>
+            <version>${parent.version}</version>
         </dependency>
     </dependencies>
 
