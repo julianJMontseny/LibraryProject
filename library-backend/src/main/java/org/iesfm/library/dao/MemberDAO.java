@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MemberDAO {
     List<Member> list();
+    void insert(Member member);
 }
