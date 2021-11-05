@@ -4,47 +4,31 @@ import org.iesfm.library.Member;
 import org.iesfm.library.dao.MemberDAO;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-<<<<<<< HEAD
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class JDBCMemberDAO implements MemberDAO {
 
     private NamedParameterJdbcTemplate jdbc;
 
-    private final String SELECT_SOCIO = "SELECT * FROM member " +
-                                        "WHERE nif = :nif";
-
-=======
-import java.util.List;
-
-public class JDBCMemberDAO implements MemberDAO {
-    private NamedParameterJdbcTemplate jdbc;
-
->>>>>>> 8d4ba4dd3f189e25e19c9c6dd3603ef55a9e12bf
     public JDBCMemberDAO(NamedParameterJdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
-<<<<<<< HEAD
-    @Override
-    public Member getMember(String nif) {
-        Map <String, Object> params = new HashMap<>();
-        params.put("nif", nif);
+    private final static String SELECT_MEMBERS = "SELECT * FROM member";
 
-        return jdbc.queryForObject(
-                SELECT_SOCIO,
-                params,
-                (rs, rowNum) -> new Member(
-                        rs.getString("nif"),
-                        rs.getString("name"),
-                        rs.getString("surname")
-                )
-        );
-    }
-}
-=======
-    private final static String SELECT_MEMBER = "SELECT * FROM member";
+    private final static String INSERT_MEMBER =
+            "INSERT INTO member(" +
+                    "nif," +
+                    "name," +
+                    "surname)" +
+                    "VALUES(:nif," +
+                    ":name," +
+                    ":surname)";
+
+    private final static String SELECT_MEMBER = "SELECT * FROM member " +
+                                                "WHERE nif = :nif";
 
     @Override
     public List<Member> list() {
@@ -58,5 +42,30 @@ public class JDBCMemberDAO implements MemberDAO {
                         )
         );
     }
+
+
+    @Override
+    public void insert(Member member) {
+        Map<String, Object> memberParams = new HashMap<>();
+        memberParams.put("nif", member.getNif());
+        memberParams.put("name", member.getName());
+        memberParams.put("surname", member.getSurname());
+        jdbc.update(INSERT_MEMBER, memberParams);
+    }
+
+    @Override
+    public Member getMember(String nif) {
+        Map <String, Object> params = new HashMap<>();
+        params.put("nif", nif);
+
+        return jdbc.queryForObject(
+                SELECT_MEMBER,
+                params,
+                (rs, rownum) -> new Member(
+                        rs.getString("nif"),
+                        rs.getString("name"),
+                        rs.getString("surname")
+                )
+        );
+    }
 }
->>>>>>> 8d4ba4dd3f189e25e19c9c6dd3603ef55a9e12bf

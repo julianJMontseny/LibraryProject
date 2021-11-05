@@ -13,6 +13,8 @@ public class JDBCBookDAO implements BookDAO {
 
     private NamedParameterJdbcTemplate jdbc;
     private static final String SELECT_BOOK_BY_YEAR = "SELECT * FROM BOOK WHERE year = :year ";
+    private static final String SELECT_BOOK_AUTHOR = "SELECT * FROM book WHERE author = :author";
+    private final static String SELECT_BOOKS = "SELECT * FROM book";
     private final static String INSERT_BOOK = "INSERT INTO Book(" +
             " isbn, " +
             " title, " +
@@ -25,6 +27,9 @@ public class JDBCBookDAO implements BookDAO {
             " :author, " +
             " :year" +
             ")";
+
+
+
 
 
     public JDBCBookDAO(NamedParameterJdbcTemplate jdbc) {
@@ -49,6 +54,7 @@ public class JDBCBookDAO implements BookDAO {
         )));
     }
 
+
     @Override
     public void insert(Book book) {
         Map<String, Object> params = new HashMap<>();
@@ -60,6 +66,34 @@ public class JDBCBookDAO implements BookDAO {
     }
 
 
+
+    public List<Book> lookForBookWithAuthor(String author){
+        Map<String, Object> params = new HashMap<>();
+        params.put("author", author);
+        return jdbc.query(SELECT_BOOK_AUTHOR, params, (rs, n) -> new Book(
+                rs.getString("isbn"),
+                rs.getString("title"),
+                rs.getString("author"),
+                rs.getInt("year")
+
+        ));
+    }
+
+
+    @Override
+    public List<Book> listAll() {
+        Map<String, Object> params = new HashMap<>();
+        return jdbc.query(
+                SELECT_BOOKS,
+                (rs, rowNum) ->
+                        new Book(
+                                rs.getString("isbn"),
+                                rs.getString("title"),
+                                rs.getString("author"),
+                                rs.getInt("year")
+                        )
+        );
+    }
 }
 
 
