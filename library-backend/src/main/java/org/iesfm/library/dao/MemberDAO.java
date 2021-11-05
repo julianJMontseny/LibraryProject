@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface MemberDAO {
 
-    public Member getMember (String nif);
-
     List<Member> list();
+
+    Member getMember (String nif);
+
+    void insert(Member member);
 }
