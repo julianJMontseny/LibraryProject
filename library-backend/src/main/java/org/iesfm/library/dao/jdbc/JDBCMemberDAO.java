@@ -33,7 +33,7 @@ public class JDBCMemberDAO implements MemberDAO {
     @Override
     public List<Member> list() {
         return jdbc.query(
-                SELECT_MEMBER,
+                SELECT_MEMBERS,
                 (rs, n) ->
                         new Member(
                                 rs.getString("nif"),
