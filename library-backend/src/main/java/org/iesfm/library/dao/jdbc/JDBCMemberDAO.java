@@ -29,17 +29,24 @@ public class JDBCMemberDAO implements MemberDAO {
 
     @Override
     public List<Member> list() {
-        return null;
+        return jdbc.query(
+                SELECT_MEMBER,
+                (rs, n) ->
+                        new Member(
+                                rs.getString("nif"),
+                                rs.getString("name"),
+                                rs.getString("surname")
+                        )
+        );
     }
-
 
 
     @Override
     public void insert(Member member) {
-        Map<String,Object> memberParams = new HashMap<>();
-        memberParams.put("nif",member.getNif());
-        memberParams.put("name",member.getName());
-        memberParams.put("surname",member.getSurname());
-        jdbc.update(INSERT_MEMBER,memberParams);
+        Map<String, Object> memberParams = new HashMap<>();
+        memberParams.put("nif", member.getNif());
+        memberParams.put("name", member.getName());
+        memberParams.put("surname", member.getSurname());
+        jdbc.update(INSERT_MEMBER, memberParams);
     }
 }
