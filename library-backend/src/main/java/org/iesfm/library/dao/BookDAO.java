@@ -7,14 +7,9 @@ import java.util.List;
 
 public interface BookDAO {
 
-<<<<<<< HEAD
-     List<Book> bookListByYear();
-=======
-    public List<Book> bookListByYear();
 
+    List<Book> bookListByYear(int year);
+     
     void bookModify();
-
-
->>>>>>> 85c927b3fc4b76f4444e36289229a9ef121858f2
 
 }
