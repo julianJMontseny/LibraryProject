@@ -32,6 +32,8 @@ public class JDBCMemberDAO implements MemberDAO {
         return null;
     }
 
+
+
     @Override
     public void insert(Member member) {
         Map<String,Object> memberParams = new HashMap<>();
