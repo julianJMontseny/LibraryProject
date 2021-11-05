@@ -28,7 +28,7 @@ public class JDBCMemberDAO implements MemberDAO {
                     ":surname)";
 
     private final static String SELECT_MEMBER = "SELECT * FROM member " +
-                                                "WHERE nif = :nif";
+            "WHERE nif = :nif";
 
     @Override
     public List<Member> list() {
@@ -55,7 +55,7 @@ public class JDBCMemberDAO implements MemberDAO {
 
     @Override
     public Member getMember(String nif) {
-        Map <String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put("nif", nif);
 
         return jdbc.queryForObject(

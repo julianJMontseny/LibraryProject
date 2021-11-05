@@ -8,7 +8,7 @@ public interface MemberDAO {
 
     List<Member> list();
 
-    Member getMember (String nif);
+    Member getMember(String nif);
 
     void insert(Member member);
 }

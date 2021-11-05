@@ -41,7 +41,7 @@ public class JDBCBookLendDAO {
     }
 
 
-    public List<BookLend> listBookLendByNif(String nif){
+    public List<BookLend> listBookLendByNif(String nif) {
         Map<String, Object> params = new HashMap<>();
         params.put("nif", nif);
         return jdbc.query(SELECT_BOOKLEND_BY_NIF, params, (rs, n) -> new BookLend(
@@ -50,7 +50,7 @@ public class JDBCBookLendDAO {
                 rs.getDate("lend_date"),
                 rs.getDate("return_date"),
                 rs.getInt("status_id")
-        ) );
+        ));
     }
 
 }
