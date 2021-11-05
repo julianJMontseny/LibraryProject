@@ -12,6 +12,6 @@ public interface BookDAO {
      
     void bookModify();
 
-    public List<Book> listAll();
+    List<Book> listAll();
 
     }
