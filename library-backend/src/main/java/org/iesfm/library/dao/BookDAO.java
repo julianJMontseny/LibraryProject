@@ -14,5 +14,5 @@ public interface BookDAO {
 
     List<Book> listAll();
 
-    public List<Book> lookForBookWithAuthor(String author);
+    List<Book> lookForBookWithAuthor(String author);
     }
