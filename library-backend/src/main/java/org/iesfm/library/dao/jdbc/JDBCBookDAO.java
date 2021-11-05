@@ -12,9 +12,24 @@ import java.util.Map;
 public class JDBCBookDAO implements BookDAO {
 
     private NamedParameterJdbcTemplate jdbc;
-    private static final String SELECT_BOOK_BY_YEAR = "SELLECT * FROM BOOK WHERE year = :year ";
+    private static final String SELECT_BOOK_BY_YEAR = "SELECT * FROM BOOK WHERE year = :year ";
     private static final String SELECT_BOOK_AUTHOR = "SELECT * FROM book WHERE author = :author";
     private final static String SELECT_BOOKS = "SELECT * FROM book";
+    private final static String INSERT_BOOK = "INSERT INTO Book(" +
+            " isbn, " +
+            " title, " +
+            " author, " +
+            " year" +
+            ") " +
+            "VALUES(" +
+            " :isbn, " +
+            " :title, " +
+            " :author, " +
+            " :year" +
+            ")";
+
+
+
 
 
     public JDBCBookDAO(NamedParameterJdbcTemplate jdbc) {
@@ -39,6 +54,19 @@ public class JDBCBookDAO implements BookDAO {
         )));
     }
 
+
+    @Override
+    public void insert(Book book) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("isbn", book.getIsbn());
+        params.put("title", book.getTitle());
+        params.put("author", book.getAuthor());
+        params.put("year", book.getYear());
+        jdbc.update(INSERT_BOOK, params);
+    }
+
+
+
     public List<Book> lookForBookWithAuthor(String author){
         Map<String, Object> params = new HashMap<>();
         params.put("author", author);
@@ -50,8 +78,6 @@ public class JDBCBookDAO implements BookDAO {
 
         ));
     }
-
-
 
 
     @Override
