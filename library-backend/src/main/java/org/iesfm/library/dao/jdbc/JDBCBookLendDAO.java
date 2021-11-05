@@ -16,6 +16,30 @@ public class JDBCBookLendDAO {
         this.jdbc = jdbc;
     }
 
+    private final static String INSERT_BOOKLEND = "insert into book_lend(" +
+            " nif, " +
+            " isbn, " +
+            " lend_date, " +
+            " return_date, " +
+            " status_id" +
+            ")" +
+            "VALUES (" +
+            " :nif, " +
+            " :isbn, " +
+            " :lend_date, " +
+            " :return_date, " +
+            " :status_id " +
+            ")";
+
+    public void insert(BookLend booklend) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("nif", booklend.getNif());
+        params.put("isbn", booklend.getIsbn());
+        params.put("lend_date", booklend.getLendDate());
+        params.put("status_id", booklend.getStatusId());
+        jdbc.update(INSERT_BOOKLEND, params);
+    }
+
 
     public List<BookLend> listBookLendByNif(String nif){
         Map<String, Object> params = new HashMap<>();
