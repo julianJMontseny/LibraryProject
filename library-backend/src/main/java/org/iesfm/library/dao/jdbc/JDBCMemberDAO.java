@@ -17,6 +17,14 @@ public class JDBCMemberDAO implements MemberDAO {
 
     @Override
     public List<Member> list() {
-        return null;
+        return jdbc.query(
+                SELECT_MEMBER,
+                (rs, n) ->
+                        new Member(
+                                rs.getString("nif"),
+                                rs.getString("name"),
+                                rs.getString("surname")
+                        )
+        );
     }
 }
