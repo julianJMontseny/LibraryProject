@@ -9,9 +9,10 @@ public interface BookDAO {
 
 
     List<Book> bookListByYear(int year);
-     
+
     void bookModify();
 
     public List<Book> listAll();
 
+    public List<Book> lookForBookWithAuthor(String author);
     }
