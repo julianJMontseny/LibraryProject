@@ -7,9 +7,6 @@ import java.util.List;
 
 public interface BookDAO {
 
-    public List<Book> bookListByYear();
-    
-
-
+     List<Book> bookListByYear();
 
 }
