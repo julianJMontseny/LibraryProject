@@ -12,4 +12,6 @@ public interface BookDAO {
      
     void bookModify();
 
+    void insert (Book book);
+
 }
