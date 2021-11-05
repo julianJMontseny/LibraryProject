@@ -10,6 +10,14 @@ import java.util.Map;
 
 public class JDBCMemberDAO implements MemberDAO {
 
+    private NamedParameterJdbcTemplate jdbc;
+
+    public JDBCMemberDAO(NamedParameterJdbcTemplate jdbc) {
+        this.jdbc = jdbc;
+    }
+
+    private final static String SELECT_MEMBERS = "SELECT * FROM member";
+
     private final static String INSERT_MEMBER =
             "INSERT INTO member(" +
                     "nif," +
@@ -19,13 +27,8 @@ public class JDBCMemberDAO implements MemberDAO {
                     ":name," +
                     ":surname)";
 
-    private NamedParameterJdbcTemplate jdbc;
-
-    public JDBCMemberDAO(NamedParameterJdbcTemplate jdbc) {
-        this.jdbc = jdbc;
-    }
-
-    private final static String SELECT_MEMBER = "SELECT * FROM member";
+    private final static String SELECT_MEMBER = "SELECT * FROM member " +
+                                                "WHERE nif = :nif";
 
     @Override
     public List<Member> list() {
@@ -39,5 +42,21 @@ public class JDBCMemberDAO implements MemberDAO {
         memberParams.put("name",member.getName());
         memberParams.put("surname",member.getSurname());
         jdbc.update(INSERT_MEMBER,memberParams);
+    }
+
+    @Override
+    public Member getMember(String nif) {
+        Map <String, Object> params = new HashMap<>();
+        params.put("nif", nif);
+
+        return jdbc.queryForObject(
+                SELECT_MEMBER,
+                params,
+                (rs, rownum) -> new Member(
+                        rs.getString("nif"),
+                        rs.getString("name"),
+                        rs.getString("surname")
+                )
+        );
     }
 }

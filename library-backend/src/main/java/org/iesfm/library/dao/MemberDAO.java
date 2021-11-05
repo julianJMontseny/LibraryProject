@@ -7,6 +7,8 @@ import java.util.List;
 public interface MemberDAO {
 
     List<Member> list();
-    
+
+    Member getMember (String nif);
+
     void insert(Member member);
 }
