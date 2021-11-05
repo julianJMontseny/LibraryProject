@@ -8,14 +8,14 @@ public class BookLend {
     private String isbn;
     private Date lendDate;
     private Date returnDate;
-    private String statusName;
+    private Integer statusId;
 
-    public BookLend(String nif, String isbn, Date lendDate, Date returnDate, String statusName) {
+    public BookLend(String nif, String isbn, Date lendDate, Date returnDate, Integer statusId) {
         this.nif = nif;
         this.isbn = isbn;
         this.lendDate = lendDate;
         this.returnDate = returnDate;
-        this.statusName = statusName;
+        this.statusId = statusId;
     }
 
     public String getNif() {
@@ -50,12 +50,12 @@ public class BookLend {
         this.returnDate = returnDate;
     }
 
-    public String getStatusName() {
-        return statusName;
+    public Integer getStatusId() {
+        return statusId;
     }
 
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setStatusId(Integer statusId) {
+        this.statusId = statusId;
     }
 
     @Override
@@ -63,12 +63,12 @@ public class BookLend {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookLend bookLend = (BookLend) o;
-        return Objects.equals(nif, bookLend.nif) && Objects.equals(isbn, bookLend.isbn) && Objects.equals(lendDate, bookLend.lendDate) && Objects.equals(returnDate, bookLend.returnDate) && Objects.equals(statusName, bookLend.statusName);
+        return Objects.equals(nif, bookLend.nif) && Objects.equals(isbn, bookLend.isbn) && Objects.equals(lendDate, bookLend.lendDate) && Objects.equals(returnDate, bookLend.returnDate) && Objects.equals(statusId, bookLend.statusId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nif, isbn, lendDate, returnDate, statusName);
+        return Objects.hash(nif, isbn, lendDate, returnDate, statusId);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class BookLend {
                 ", isbn='" + isbn + '\'' +
                 ", lendDate=" + lendDate +
                 ", returnDate=" + returnDate +
-                ", statusName='" + statusName + '\'' +
+                ", statusId=" + statusId +
                 '}';
     }
 }
