@@ -10,7 +10,7 @@ public interface BookDAO {
 
     List<Book> bookListByYear(int year);
      
-    void bookModify();
+    void bookModify(Book book);
 
     public List<Book> listAll();
 
