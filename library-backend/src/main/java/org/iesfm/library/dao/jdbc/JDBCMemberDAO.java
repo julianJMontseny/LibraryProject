@@ -61,7 +61,7 @@ public class JDBCMemberDAO implements MemberDAO {
         return jdbc.queryForObject(
                 SELECT_MEMBER,
                 params,
-                (rs, rownum) -> new Member(
+                (rs, rowNum) -> new Member(
                         rs.getString("nif"),
                         rs.getString("name"),
                         rs.getString("surname")
