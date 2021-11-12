@@ -58,14 +58,18 @@ public class JDBCMemberDAO implements MemberDAO {
         Map<String, Object> params = new HashMap<>();
         params.put("nif", nif);
 
-        return jdbc.queryForObject(
-                SELECT_MEMBER,
-                params,
-                (rs, rowNum) -> new Member(
-                        rs.getString("nif"),
-                        rs.getString("name"),
-                        rs.getString("surname")
-                )
-        );
+        try {
+            return jdbc.queryForObject(
+                    SELECT_MEMBER,
+                    params,
+                    (rs, rowNum) -> new Member(
+                            rs.getString("nif"),
+                            rs.getString("name"),
+                            rs.getString("surname")
+                    )
+            );
+        } catch (Exception e){
+            return null;
+        }
     }
 }
