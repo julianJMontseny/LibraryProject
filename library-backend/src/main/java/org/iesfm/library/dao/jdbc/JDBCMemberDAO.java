@@ -2,6 +2,7 @@ package org.iesfm.library.dao.jdbc;
 
 import org.iesfm.library.Member;
 import org.iesfm.library.dao.MemberDAO;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.util.HashMap;
@@ -68,7 +69,7 @@ public class JDBCMemberDAO implements MemberDAO {
                             rs.getString("surname")
                     )
             );
-        } catch (Exception e){
+        } catch (EmptyResultDataAccessException e){
             return null;
         }
     }
